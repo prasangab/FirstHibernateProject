@@ -1,5 +1,7 @@
 package com.prasanga.hibernate;
 
+//import java.util.Date;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -9,16 +11,24 @@ public class Main {
 	
 	public static void main(String []args){
 		
-		Student_Info student = new Student_Info();
+		Student student = new Student();
+		student.setStudent_name("Prasanga");
 		
-		student.setName("Prasanga");
-		student.setRollNo(1);
+		Student_Details studentDetails = new Student_Details();
+		studentDetails.setStudent_mobile_no("0717524500");
+		
+		//this is an important step
+		studentDetails.setStudent(student);
+		
+
+		//student.setRollNo(1);
+		//student2.setBirthDate(new Date());
 		
 		SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
 		Session session =sessionFactory.openSession();
 		session.beginTransaction();
 		
-		session.save(student);
+		session.save(studentDetails);
 		
 		session.getTransaction().commit();
 		session.close();
